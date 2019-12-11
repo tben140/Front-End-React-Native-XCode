@@ -6,31 +6,33 @@
  * @flow
  */
 
-import React, {Component} from 'react';
+import React from 'react';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import Login from './src/LoginPage';
 
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import Map from './src/Map';
-
-class App extends Component {
-  render() {
-    return <Map />;
+const Applicate = createStackNavigator({
+  home:{
+    screen: Login
+  }
+  
+},
+{
+  navigationOptions:{
+    header:false,
   }
 }
+);
+
+const Application = createAppContainer(Applicate);
+
+export default class App extends React.Component{
+  render()
+    { return(<Application/>)
+    }
+  }
+
+
 
 export default App;
