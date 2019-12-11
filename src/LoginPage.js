@@ -1,108 +1,41 @@
 import React from 'react';
 import {StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button} from 'react-native';
-import { getSupportedVideoFormats } from 'expo/build/AR';
 import getUser from './Api.js';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
-import SignUpPage from './SignUpPage.js';
 
 
 
 
 
-const signup = createStackNavigator({
-    signuppage:{
-      screen: SignUpPage
-    }
-    
-  },
-  {
-    navigationOptions:{
-      header:false,
-    }
-  }
-  );
 
- const SignUppage = createAppContainer(signup);
 
 
 export default class Login extends React.Component{
 
 
-
- 
-
+  
        state = {
        userName: '',
-       passWord: '',
-       authenticatedUserName:'',
+       passWord: ''
        }
    
-
-       //route to homepage and pass on username from backend as props
-
-goToHomePage = () => {
-
-    const {authenticatedUserName} = this.state;
-
-    this.props.navigation.navigate('UserHomePage', {
-        userName: authenticatedUserName
-    })
-
-}
-
 
 
         //sends user/password to api function and then goes to homepage
     
 
-    login = () => {
-        
-        
-        const {userName, passWord} = this.state;
-        
-        getUser(userName, passWord).then((res)=>{
-            
-            if(res.success){
-                
-
-                this.setState((res)=> 
-                {
-                    authenticatedUserName =   res[0].userName;
-                })
-
-                console.log(this.state.authenticatedUserName)
-
-
-                return goToHomePage()
-          
-             }
-            
-        }
-          
-
-        )    
-
-    }
+   
 
    
-      //goes to sign up page
-
-    goToSignUp = () => {
-
-        
-
-        return SignUppage;
-
-    }
 
 
     render() {
         const {userName, passWord} = this.state
         return (
             <KeyboardAvoidingView behavior='padding' style = {styles.wrapper}>
+
                 <View style = {styles.container}>
-                    <Text styles= {styles.footer}/>
+
+                    <Text styles= {styles.header}/>
 
                         <TextInput style = {styles.TextInput} placeholder= 'username'
                         onChangeText = {(userName) => this.setState({userName})}/>
@@ -112,21 +45,40 @@ goToHomePage = () => {
                         <TextInput
                         style = {styles.TextInput} placeholder= 'password'
                         onChangeText = {(passWord) => this.setState({passWord})}
+
                         />
 
-                   <TouchableOpacity 
-                   styles={styles.btn}
-                   onPress={this.login(userName,passWord)}
-                   ><Text>Log in</Text></TouchableOpacity>
+                    <Button
+                                style = {styles.button}
+                                title="Log in"
+                                onPress={() => {
+        
+        
+                                    const {userName, passWord} = this.state;
+                                    
+                                    getUser(userName, passWord).then((res)=>{
+                                        console.log(res)
+                                        
+                                        if(res){
+                            
+                                            return this.props.navigation.navigate('HomePage');
+                                         }
+                                        
+                                    }
+                                      
+                            
+                                    )    
+                            
+                                }}>
+                     </Button>
 
-<TouchableOpacity 
-                   styles={styles.btn}
-                   onPress={this.goToSignUp}
-                   ><Text>Sign up</Text>
-                   </TouchableOpacity>
-                      
 
-                   
+                    <Button 
+                                style = {styles.button}
+                                title="Sign Up"
+                                onPress={() => this.props.navigation.navigate('Home')}>
+                     </Button>
+     
                 </View>
 
             </KeyboardAvoidingView>
@@ -176,6 +128,8 @@ const styles = StyleSheet.create({
 
 
 })
+
+
 
 
 
