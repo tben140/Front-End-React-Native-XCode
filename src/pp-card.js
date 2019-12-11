@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Axios from 'axios';
-import { retrieveNestedData } from './utils/utils'
+import { retrieveNestedData } from '../utils/utils'
 
 export default class pollutionPointCard extends React.Component {
     state = {
