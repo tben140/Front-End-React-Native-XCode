@@ -7,7 +7,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 import SignUpPage from './SignUpPage.js';
 
 
-
+//please download and add 'react-navigation' as a dependency for this component to work
 
 
 const signup = createStackNavigator({
