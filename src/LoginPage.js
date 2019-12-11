@@ -34,9 +34,23 @@ export default class Login extends React.Component{
 
        state = {
        userName: '',
-       passWord: ''
+       passWord: '',
+       authenticatedUserName:'',
        }
    
+
+       //route to homepage and pass on username from backend as props
+
+goToHomePage = () => {
+
+    const {authenticatedUserName} = this.state;
+
+    this.props.navigation.navigate('UserHomePage', {
+        userName: authenticatedUserName
+    })
+
+}
+
 
 
         //sends user/password to api function and then goes to homepage
@@ -50,8 +64,17 @@ export default class Login extends React.Component{
         getUser(userName, passWord).then((res)=>{
             
             if(res.success){
+                
 
-                return goToHomePage(res[0].username)
+                this.setState((res)=> 
+                {
+                    authenticatedUserName =   res[0].userName;
+                })
+
+                console.log(this.state.authenticatedUserName)
+
+
+                return goToHomePage()
           
              }
             
