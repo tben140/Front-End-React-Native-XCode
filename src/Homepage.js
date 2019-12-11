@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
 
+// import {createAppContainer} from 'react-navigation';
+// import {createStackNavigator} from 'react-navigation-stack';
+
 MapboxGL.setAccessToken(
   'pk.eyJ1IjoiaGFycnlwZnJ5IiwiYSI6ImNrM3EwYTVmYjA4Mzgzbm1vd2h0NjRobDgifQ.ZrK9wTTyKg6YpwI2KGC9bQ',
 );
@@ -16,6 +19,23 @@ MapboxGL.setAccessToken(
 // import EndPointMap from "./endpointmap";
 
 export default class Homepage extends Component {
+  static navigationOptions = ({navigation}) => {
+    const test = this.props;
+    return {
+      headerRight: () => (
+        <Button
+          color="white"
+          title="Log in"
+          onPress={navigation.getParam('LoginPage')}
+        />
+      ),
+      headerStyle: {
+        backgroundColor: '#2196F3',
+        color: 'white',
+      },
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -32,12 +52,15 @@ export default class Homepage extends Component {
         lng: -2.236825,
       },
       zoom: 14,
-      endCoordinates: [],
+      endCoordinates: [-2.2392781722504367, 53.48492529435421],
       markerDropped: false,
     };
   }
 
   componentDidMount() {
+    this.props.navigation.setParams({
+      LoginPage: () => this.props.navigation.navigate('LoginPage'),
+    });
     return fetch('https://project-bhilt.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
@@ -83,10 +106,19 @@ export default class Homepage extends Component {
             flex: 2,
             justifyContent: 'center',
             alignItems: 'center',
-            // padding: 40,
+
           }}>
           <View style={styles.header}>
-            <Text style={styles.boldText}>Saviar</Text>
+            <Text style={styles.boldText}> Savior</Text>
+          </View>
+          <View style={styles.welcome}>
+            <Text style={styles.welcomeText}>
+              Welcome to Saviar {this.state.username.toUpperCase()},{'\n'} a
+              clean route through impure air!{'\n'}
+              You have set Your start point to "Manchester Federation house".
+              Please, select on the below map were you would like to go
+            </Text>
+
           </View>
           <View style={styles.welcome}></View>
           <View style={styles.page}>
@@ -109,6 +141,13 @@ export default class Homepage extends Component {
                   />
                 )}
               </MapboxGL.MapView>
+              <Button
+                title="Create Route"
+                color="white"
+                onPress={() => {
+                  this.props.navigation.navigate('Map');
+                }}
+              />
             </View>
           </View>
         </View>
@@ -145,14 +184,23 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
-    // height: 100,
+    height: 100,
     width: Dimensions.get('window').width,
+    padding: 0,
   },
+
   page: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    padding: 0,
+  },
+  container: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#2196F3',
+    padding: 0,
   },
 });
 
