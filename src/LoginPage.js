@@ -1,133 +1,143 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  AsyncStorage,
-  Button,
-} from 'react-native';
-// import {getSupportedVideoFormats} from 'expo/build/AR';
-// import getUser from './Api.js';
-// import {createAppContainer} from 'react-navigation';
-// import {createStackNavigator} from 'react-navigation-stack';
-// import SignUpPage from './SignUpPage.js';
 
-//please download and add 'react-navigation' as a dependency for this component to work
+import {StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button, Alert} from 'react-native';
+import getUser from './Api.js';
 
-// const signup = createStackNavigator(
-//   {
-//     signuppage: {
-//       screen: SignUpPage,
-//     },
-//   },
-//   {
-//     navigationOptions: {
-//       header: false,
-//     },
-//   },
-// );
 
-// const SignUppage = createAppContainer(signup);
 
-export default class LoginPage extends React.Component {
-  state = {
-    userName: '',
-    passWord: '',
-    authenticatedUserName: '',
-  };
 
-  //route to homepage and pass on username from backend as props
 
-  // goToHomePage = () => {
-  //   const {authenticatedUserName} = this.state;
 
-  // this.props.navigation.navigate('UserHomePage', {
-  //   userName: authenticatedUserName,
-  // });
-  // };
 
-  //sends user/password to api function and then goes to homepage
 
-  // login = () => {
-  //   const {userName, passWord} = this.state;
+export default class Login extends React.Component{
 
-  //   getUser(userName, passWord).then(res => {
-  //     if (res.success) {
-  //       this.setState(res => {
-  //         authenticatedUserName = res[0].userName;
-  //       });
 
-  //       console.log(this.state.authenticatedUserName);
+  
+       state = {
+       username: '',
+       password: ''
+       }
+   
 
-  //       return goToHomePage();
-  //     }
-  //   });
-  // };
 
-  //goes to sign up page
+        //sends user/password to api function and then goes to homepage
+    
 
-  //   goToSignUp = () => {
-  //     return SignUppage;
-  //   };
+   
 
-  render() {
-    const {userName, passWord} = this.state;
-    return (
-      <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <View style={styles.container}>
-          <Text styles={styles.footer} />
+   
 
-          <TextInput
-            style={styles.TextInput}
-            placeholder="username"
-            onChangeText={userName => this.setState({userName})}
-          />
 
-          <TextInput
-            style={styles.TextInput}
-            placeholder="password"
-            onChangeText={passWord => this.setState({passWord})}
-          />
+    render() {
+        const {username, password} = this.state
+        return (
+            <KeyboardAvoidingView behavior='padding' style = {styles.wrapper}>
 
-          {/* onPress={this.login(userName, passWord)} */}
-          <TouchableOpacity styles={styles.btn}>
-            <Text>Log in</Text>
-          </TouchableOpacity>
-          {/*this.goToSignUp */}
-          <TouchableOpacity styles={styles.btn}>
-            <Text>Sign up</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
-    );
-  }
+                <View style = {styles.container}>
+
+                    <Text styles= {styles.header}/>
+
+                        <TextInput style = {styles.TextInput} placeholder= 'username'
+                        onChangeText = {(username) => this.setState({username})}/>
+
+
+
+                        <TextInput
+                        style = {styles.TextInput} placeholder= 'password'
+                        onChangeText = {(password) => this.setState({password})}
+
+                        />
+
+                    <Button
+                                style = {styles.button}
+                                title="Log in"
+                                onPress={() => {
+        
+        
+                                    const {username, password} = this.state;
+                                    
+                                    getUser(username, password).then((res)=>{
+                                        console.log(res)
+                                        
+                                        if(res){
+                            
+                                            return this.props.navigation.navigate('HomePage', {
+                                                username:username,
+                                                password:password
+
+                                            });
+                                         }
+
+                                         else{Alert.alert('Username not found.Please sign up')}
+                                        
+                                    }
+                                      
+                            
+                                    ).catch(err=>{Alert.alert(err)})    
+                            
+                                }}>
+                     </Button>
+
+
+                    <Button 
+                                style = {styles.button}
+                                title="Sign Up"
+                                onPress={() => this.props.navigation.navigate('Home')>
+                     </Button>
+     
+                </View>
+
+            </KeyboardAvoidingView>
+        )
+    }
+
+    
+
 }
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingLeft: 40,
-    paddingRight: 40,
-  },
-  header: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 60,
-  },
-  TextInput: {
-    marginBottom: 20,
-    padding: 20,
-    alignSelf: 'stretch',
-  },
 
-  Button: {
-    alignSelf: 'stretch',
-  },
-});
+    wrapper:{
+        flex:1,
+    },
+    container:{
+        flex:1,
+        alignItems :'center',
+        justifyContent: 'center',
+        paddingLeft:40,
+        paddingRight: 40,
+
+
+
+
+        
+    },
+    header:{
+        fontSize: 30,
+        fontWeight: 'bold',
+        marginBottom: 60,
+
+
+
+    },
+    TextInput:{
+        marginBottom: 20,
+        padding: 20,
+        alignSelf: 'stretch'
+    },
+
+    Button:{
+        alignSelf:'stretch'
+    }
+
+
+
+
+
+})
+
+
+
+
+
+
