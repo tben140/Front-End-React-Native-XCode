@@ -162,8 +162,8 @@ export default class Homepage extends Component {
                 <MapboxGL.Camera
                   defaultSettings={{
                     centerCoordinate: [
-                      this.state.defaultCenter.lng,
-                      this.state.defaultCenter.lat,
+                      this.state.startCoordinates[1],
+                      this.state.startCoordinates[0],
                     ],
                     zoomLevel: this.state.zoom,
                   }}

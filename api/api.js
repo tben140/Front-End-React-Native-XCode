@@ -20,4 +20,3 @@ export const getRoute = (startCoordinates, endCoordinates, avoidAreas) => {
 export const getPollutionData = () => {
   return axios.get('https://project-bhilt.appspot.com/api/pollution-points/');
 };
-// 53.487771,-2.253234;53.475171,-2.232234
