@@ -37,9 +37,10 @@ import Geolocation from 'react-native-geolocation-service';
 import Map from './src/Map';
 import Homepage from './src/Homepage';
 import LoginPage from './src/LoginPage';
+import SignUpPage from './src/SignUpPage';
 
 const appStackNavigator = createStackNavigator(
-  {Homepage, Map, LoginPage},
+  {Homepage, Map, LoginPage, SignUpPage},
   {initialRouteName: 'Homepage'},
 );
 
@@ -56,22 +57,22 @@ class App extends Component {
     this.setState({endCoordinates: []});
   };
 
-  findCoordinates = () => {
-    console.log('Find coordinates running');
-    Geolocation.getCurrentPosition(
-      location => {
-        console.log(location.coords.latitude, location.coords.longitude);
-        this.setState({
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        });
-      },
-      error => {
-        console.log(error.code, error.message);
-      },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-    );
-  };
+  // findCoordinates = () => {
+  //   console.log('Find coordinates running');
+  //   Geolocation.getCurrentPosition(
+  //     location => {
+  //       console.log(location.coords.latitude, location.coords.longitude);
+  //       this.setState({
+  //         latitude: location.coords.latitude,
+  //         longitude: location.coords.longitude,
+  //       });
+  //     },
+  //     error => {
+  //       console.log(error.code, error.message);
+  //     },
+  //     {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+  //   );
+  // };
 
   componentDidMount() {
     if (Platform.OS !== 'ios') {
@@ -101,9 +102,9 @@ class App extends Component {
   }
 
   render() {
-    {
-      this.state.latitude === null && this.findCoordinates();
-    }
+    // {
+    //   this.state.latitude === null && this.findCoordinates();
+    // }
     // console.log('STATE => ', this.state);
     return (
       <>

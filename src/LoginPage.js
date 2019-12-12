@@ -50,14 +50,14 @@ export default class Login extends React.Component {
                 .then(res => {
                   console.log(res);
 
-                  if (res) {
-                    return this.props.navigation.navigate('HomePage', {
-                      username: username,
-                      password: password,
-                    });
-                  } else {
-                    Alert.alert('Username not found.Please sign up');
-                  }
+                  //   if (res) {
+                  this.props.navigation.navigate('Homepage', {
+                    username,
+                    password,
+                  });
+                  //   } else {
+                  //     Alert.alert('Username not found. Please sign up');
+                  //   }
                 })
                 .catch(err => {
                   Alert.alert(err);
@@ -67,7 +67,9 @@ export default class Login extends React.Component {
           <Button
             style={styles.button}
             title="Sign Up"
-            onPress={() => this.props.navigation.navigate('Home')}></Button>
+            onPress={() =>
+              this.props.navigation.navigate('SignUpPage')
+            }></Button>
         </View>
       </KeyboardAvoidingView>
     );
