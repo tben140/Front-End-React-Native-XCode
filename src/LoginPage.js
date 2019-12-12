@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button} from 'react-native';
+import {StyleSheet, Text, View, TextInput, KeyboardAvoidingView, TouchableOpacity, AsyncStorage, Button, Alert} from 'react-native';
 import getUser from './Api.js';
 
 
@@ -14,8 +14,8 @@ export default class Login extends React.Component{
 
   
        state = {
-       userName: '',
-       passWord: ''
+       username: '',
+       password: ''
        }
    
 
@@ -29,7 +29,7 @@ export default class Login extends React.Component{
 
 
     render() {
-        const {userName, passWord} = this.state
+        const {username, password} = this.state
         return (
             <KeyboardAvoidingView behavior='padding' style = {styles.wrapper}>
 
@@ -38,13 +38,13 @@ export default class Login extends React.Component{
                     <Text styles= {styles.header}/>
 
                         <TextInput style = {styles.TextInput} placeholder= 'username'
-                        onChangeText = {(userName) => this.setState({userName})}/>
+                        onChangeText = {(username) => this.setState({username})}/>
 
 
 
                         <TextInput
                         style = {styles.TextInput} placeholder= 'password'
-                        onChangeText = {(passWord) => this.setState({passWord})}
+                        onChangeText = {(password) => this.setState({password})}
 
                         />
 
@@ -54,20 +54,26 @@ export default class Login extends React.Component{
                                 onPress={() => {
         
         
-                                    const {userName, passWord} = this.state;
+                                    const {username, password} = this.state;
                                     
-                                    getUser(userName, passWord).then((res)=>{
+                                    getUser(username, password).then((res)=>{
                                         console.log(res)
                                         
                                         if(res){
                             
-                                            return this.props.navigation.navigate('HomePage');
+                                            return this.props.navigation.navigate('HomePage', {
+                                                username:username,
+                                                password:password
+
+                                            });
                                          }
+
+                                         else{Alert.alert('Username not found.Please sign up')}
                                         
                                     }
                                       
                             
-                                    )    
+                                    ).catch(err=>{Alert.alert(err)})    
                             
                                 }}>
                      </Button>
@@ -76,7 +82,7 @@ export default class Login extends React.Component{
                     <Button 
                                 style = {styles.button}
                                 title="Sign Up"
-                                onPress={() => this.props.navigation.navigate('Home')}>
+                                onPress={() => this.props.navigation.navigate('Home')>
                      </Button>
      
                 </View>
