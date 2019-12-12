@@ -24,6 +24,7 @@ import {getRoute, getPollutionData} from '../api/api';
 import PollutionPointCard from './pp-card';
 
 import MapboxGL from '@react-native-mapbox-gl/maps';
+import LogoTitle from './LogoTitle';
 
 MapboxGL.setAccessToken(
   'pk.eyJ1IjoiaGFycnlwZnJ5IiwiYSI6ImNrM3EwYTVmYjA4Mzgzbm1vd2h0NjRobDgifQ.ZrK9wTTyKg6YpwI2KGC9bQ',
@@ -115,7 +116,11 @@ class Map extends Component {
   };
 
   static navigationOptions = {
-    title: 'Saviar',
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: '#2196F3',
+      color: 'white',
+    },
   };
 
   fetchRoute = (startCoordinates, endCoordinates, avoidAreas) => {
@@ -288,7 +293,7 @@ class Map extends Component {
                 }}
               />
             </MapboxGL.ShapeSource>
-            {/* <MapboxGL.ShapeSource id="route-shape" shape={this.state.markers}>
+            <MapboxGL.ShapeSource id="route-shape" shape={this.state.markers}>
               <MapboxGL.LineLayer
                 id="route-line"
                 style={{
@@ -298,7 +303,7 @@ class Map extends Component {
                   lineJoin: 'round',
                 }}
               />
-            </MapboxGL.ShapeSource> */}
+            </MapboxGL.ShapeSource>
           </MapboxGL.MapView>
         </View>
       </View>

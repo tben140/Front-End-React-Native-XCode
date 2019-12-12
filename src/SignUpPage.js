@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
+import LogoTitle from './LogoTitle';
 
 export default class SignUpPage extends React.Component {
   postUser = async (username, email, password, currentLocation) => {
@@ -36,6 +37,14 @@ export default class SignUpPage extends React.Component {
     email: '',
     password: '',
     currentlocation: '53.4860211, -2.2397307',
+  };
+
+  static navigationOptions = {
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: '#2196F3',
+      color: 'white',
+    },
   };
 
   signUp = () => {

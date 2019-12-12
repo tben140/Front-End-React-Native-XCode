@@ -2,6 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
+import LogoTitle from './LogoTitle';
 // import ProfilePics from './profilepics';
 
 // import 'react-native-gesture-handler';
@@ -22,12 +23,20 @@ export default class MyAccount extends Component {
     };
   }
 
+  static navigationOptions = {
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: '#2196F3',
+      color: 'white',
+    },
+  };
+
   componentDidMount() {
     return fetch('https://project-bhilt.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {
-          return user.username == 'ben'; //need to come from Login props
+          return user.username == 'Ben'; //need to come from Login props
         });
         this.setState({
           isLoading: false,
@@ -111,8 +120,7 @@ export default class MyAccount extends Component {
           <View style={styles.user}>
             <Image source={pic} style={{width: 150, height: 150}} />
             <Text style={styles.welcomeuser}>
-              Hi {username.toUpperCase()}.{'\n'} What would you like to do
-              today?
+              Hi {username}.{'\n'} What would you like to do today?
             </Text>
           </View>
           <View style={styles.usernameButton}>

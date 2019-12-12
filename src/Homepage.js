@@ -32,14 +32,8 @@ export default class Homepage extends Component {
         <>
           <Button
             color="#2196F3"
-            title="Log in"
+            title="Log In"
             onPress={navigation.getParam('LoginPage')}
-          />
-
-          <Button
-            color="#2196F3"
-            title="Map"
-            onPress={navigation.getParam('Map')}
           />
           <Button
             color="#2196F3"
@@ -59,6 +53,7 @@ export default class Homepage extends Component {
     super(props);
     this.state = {
       isLoading: true,
+      loggedIn: false,
       user: {},
       username: '',
       location: '',
@@ -83,12 +78,13 @@ export default class Homepage extends Component {
       LoginPage: () => this.props.navigation.navigate('LoginPage'),
       Map: () => this.props.navigation.navigate('Map'),
       MyAccount: () => this.props.navigation.navigate('MyAccount'),
+      // username: '',
     });
     return fetch('https://project-bhilt.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {
-          return user.username == 'ben';
+          return user.username == 'Ben';
         });
         const location = singleUser[0].current_location.split(', ');
         const latitude = Number(location[0]);
@@ -150,17 +146,16 @@ export default class Homepage extends Component {
       return (
         <View style={styles.homepage}>
           <View style={styles.welcome}>
-          <Text style={styles.welcomeText}>
-                Welcome to Saviar
-                {username ? (
-                  <Text> {username}</Text>
-                ) : (
-                  <Text> - Please log in</Text>
-                )}
-              </Text>
             <Text style={styles.welcomeText}>
-              A clean
-              route through impure air!{'\n'}
+              Welcome to Saviar
+              {username ? (
+                <Text> {username}</Text>
+              ) : (
+                <Text> - Please log in</Text>
+              )}
+            </Text>
+            <Text style={styles.welcomeText}>
+              A clean route through impure air!{'\n'}
               {'\n'}
               Please, tab on a point, on the map below to select the end point
               for your route. Then, click "Find best route"

@@ -39,9 +39,10 @@ import Map from './src/Map';
 import Homepage from './src/Homepage';
 import LoginPage from './src/LoginPage';
 import MyAccount from './src/account';
+import SignUpPage from './src/SignUpPage';
 
 const appStackNavigator = createStackNavigator(
-  {Homepage, Map, LoginPage, MyAccount},
+  {Homepage, Map, LoginPage, MyAccount, SignUpPage},
 
   {initialRouteName: 'Homepage'},
 );

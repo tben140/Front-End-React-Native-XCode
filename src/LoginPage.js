@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import getUser from './Api.js';
 import {declaredPredicate} from '@babel/types';
+import LogoTitle from './LogoTitle';
 
 export default class Login extends React.Component {
   state = {
@@ -22,6 +23,13 @@ export default class Login extends React.Component {
     password: '',
   };
 
+  static navigationOptions = {
+    headerTitle: <LogoTitle />,
+    headerStyle: {
+      backgroundColor: '#2196F3',
+      color: 'white',
+    },
+  };
   //sends user/password to api function and then goes to homepage
 
   render() {
@@ -60,18 +68,19 @@ export default class Login extends React.Component {
                   .then(res => {
                     console.log(res);
 
-                                  //   if (res) {
-                  this.props.navigation.navigate('Homepage', {
-                    username,
-                    password,
+                    //   if (res) {
+                    this.props.navigation.navigate('Homepage', {
+                      username,
+                      password,
+                    });
+
+                    //   } else {
+                    //     Alert.alert('Username not found. Please sign up');
+                    //   }
+                  })
+                  .catch(err => {
+                    Alert.alert(err);
                   });
-                  //   } else {
-                  //     Alert.alert('Username not found. Please sign up');
-                  //   }
-                })
-                .catch(err => {
-                  Alert.alert(err);
-                });   
               }}>
               <Text style={styles.textbutton}>Sign in</Text>
             </TouchableOpacity>
@@ -98,8 +107,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: 40,
-    paddingRight: 40,
+    paddingLeft: 55,
+    paddingRight: 55,
     // backgroundColor: '#DFE8FF',
   },
   header: {
