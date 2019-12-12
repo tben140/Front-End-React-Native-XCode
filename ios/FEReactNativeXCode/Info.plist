@@ -56,7 +56,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Lobster-Regular.ttf</string>
-		<string>LobsterRegular.ttf</string>
+		<string>Lobster-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

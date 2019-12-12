@@ -107,14 +107,13 @@ class App extends Component {
     // console.log('STATE => ', this.state);
     return (
       <>
-
         {/* <Map /> */}
         {/* <Homepage /> */}
         <Application />
         {/* <LoginPage /> */}
 
         {/* <Map latitude={this.state.latitude} longitude={this.state.longitude} /> */}
-//         <Homepage changeEndCoordinates={this.changeEndCoordinates} />
+        {/* <Homepage changeEndCoordinates={this.changeEndCoordinates} /> */}
 
         {/* <Text>Hello</Text> */}
       </>
