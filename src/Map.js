@@ -1,3 +1,5 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
 import {
   SafeAreaView,
@@ -113,7 +115,7 @@ class Map extends Component {
   };
 
   static navigationOptions = {
-    title: '',
+    title: 'Saviar',
   };
 
   fetchRoute = (startCoordinates, endCoordinates, avoidAreas) => {
@@ -268,19 +270,20 @@ class Map extends Component {
                     ['linear'],
                     ['heatmap-density'],
                     0,
-                    'rgba(33,102,172,0)',
+                    'rgb(51,255,20,0)',
                     0.2,
-                    'rgb(103,169,207)',
+                    'rgb(51,255,20,0)',
                     0.4,
-                    'rgb(209,229,240)',
+                    'rgb(209,229,240,0)',
                     0.6,
-                    'rgb(253,219,199)',
+                    'rgb(253,219,199,0)',
                     0.8,
-                    'rgb(239,138,98)',
+                    'rgb(239,138,98,0)',
                     1,
-                    'rgb(178,24,43)',
+                    'rgb(178,24,43,0)',
                   ],
                   heatmapRadius: 100,
+                  heatmapIntensity: 0.4,
                   heatmapOpacity: 0.8,
                 }}
               />
@@ -302,5 +305,7 @@ class Map extends Component {
     );
   }
 }
+
+// const style = StyleSheet.create({});
 
 export default Map;

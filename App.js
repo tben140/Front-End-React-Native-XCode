@@ -19,6 +19,7 @@ import {
   Alert,
   TouchableOpacity,
   PermissionsAndroid,
+  ImageBackground,
 } from 'react-native';
 
 import {createAppContainer} from 'react-navigation';
@@ -37,10 +38,11 @@ import Geolocation from 'react-native-geolocation-service';
 import Map from './src/Map';
 import Homepage from './src/Homepage';
 import LoginPage from './src/LoginPage';
-import SignUpPage from './src/SignUpPage';
+import MyAccount from './src/account';
 
 const appStackNavigator = createStackNavigator(
-  {Homepage, Map, LoginPage, SignUpPage},
+  {Homepage, Map, LoginPage, MyAccount},
+
   {initialRouteName: 'Homepage'},
 );
 
@@ -107,7 +109,11 @@ class App extends Component {
     // }
     // console.log('STATE => ', this.state);
     return (
-      <>
+      <ImageBackground
+        source={require('./assets/pics/running.jpeg')}
+        style={styles.imgBackground}
+        resizeMode="cover"
+        imageStyle={{opacity: 0.2}}>
         {/* <Map /> */}
         {/* <Homepage /> */}
         <Application />
@@ -117,9 +123,17 @@ class App extends Component {
         {/* <Homepage changeEndCoordinates={this.changeEndCoordinates} /> */}
 
         {/* <Text>Hello</Text> */}
-      </>
+      </ImageBackground>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  imgBackground: {
+    width: '100%',
+    height: '100%',
+    position: 'relative',
+  },
+});
 
 export default App;

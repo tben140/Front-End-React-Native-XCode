@@ -9,6 +9,9 @@ import {
   Alert,
 } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
+import LogoTitle from './LogoTitle';
+// import Map from './Map';
+import MyAccount from './account';
 
 // import {createAppContainer} from 'react-navigation';
 // import {createStackNavigator} from 'react-navigation-stack';
@@ -24,12 +27,26 @@ MapboxGL.setAccessToken(
 export default class Homepage extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      headerRight: () => (
-        <Button
-          color="white"
-          title="Log in"
-          onPress={navigation.getParam('LoginPage')}
-        />
+      headerTitle: <LogoTitle />,
+      headerRight: (
+        <>
+          <Button
+            color="#2196F3"
+            title="Log in"
+            onPress={navigation.getParam('LoginPage')}
+          />
+
+          <Button
+            color="#2196F3"
+            title="Map"
+            onPress={navigation.getParam('Map')}
+          />
+          <Button
+            color="#2196F3"
+            title="MyAccount"
+            onPress={navigation.getParam('MyAccount')}
+          />
+        </>
       ),
       headerStyle: {
         backgroundColor: '#2196F3',
@@ -64,6 +81,8 @@ export default class Homepage extends Component {
     this.findCoordinates();
     this.props.navigation.setParams({
       LoginPage: () => this.props.navigation.navigate('LoginPage'),
+      Map: () => this.props.navigation.navigate('Map'),
+      MyAccount: () => this.props.navigation.navigate('MyAccount'),
     });
     return fetch('https://project-bhilt.appspot.com/api/users')
       .then(response => response.json())
@@ -129,18 +148,9 @@ export default class Homepage extends Component {
       );
     } else {
       return (
-        <View
-          style={{
-            flex: 2,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <View style={styles.header}>
-            <Text style={styles.boldText}> Savior</Text>
-          </View>
+        <View style={styles.homepage}>
           <View style={styles.welcome}>
-            <Text style={styles.welcomeText}>
-              <Text>
+          <Text style={styles.welcomeText}>
                 Welcome to Saviar
                 {username ? (
                   <Text> {username}</Text>
@@ -148,13 +158,14 @@ export default class Homepage extends Component {
                   <Text> - Please log in</Text>
                 )}
               </Text>
-              {/* Welcome to Saviar {this.state.username.toUpperCase()},{'\n'} a
-              clean route through impure air!{'\n'}
-              You have set Your start point to "Manchester Federation house".
-              Please, select on the below map were you would like to go */}
+            <Text style={styles.welcomeText}>
+              A clean
+              route through impure air!{'\n'}
+              {'\n'}
+              Please, tab on a point, on the map below to select the end point
+              for your route. Then, click "Find best route"
             </Text>
           </View>
-          <View style={styles.welcome}></View>
           <View style={styles.page}>
             <View style={styles.container}>
               <MapboxGL.MapView onPress={this.mapPressed} style={styles.map}>
@@ -180,7 +191,7 @@ export default class Homepage extends Component {
               </MapboxGL.MapView>
               <Button
                 title="Create Route"
-                color="white"
+                color="#11A0E2"
                 onPress={() => {
                   if (!this.state.markerDropped) {
                     Alert.alert('Please drop pin');
@@ -201,16 +212,12 @@ export default class Homepage extends Component {
 }
 
 const styles = StyleSheet.create({
-  // header: {
-  //   fontWeight: "bold",
-  //   color: "#000"
-  // },
-  boldText: {
-    fontFamily: 'Lobster-Regular',
-    // fontWeight: 'bold',
-    fontSize: 46,
-    alignSelf: 'center',
-    color: '#24416b',
+  homepage: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 30,
+    paddingRight: 20,
   },
   loading: {
     justifyContent: 'center',
@@ -221,15 +228,16 @@ const styles = StyleSheet.create({
   },
   welcomeText: {
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 20,
-    paddingLeft: 20,
+    textAlign: 'center',
+    padding: 20,
     color: '#24354f',
+    fontFamily: 'NotoSantsTC-Black',
+    fontSize: 12,
   },
   map: {
     flex: 1,
     height: 100,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width - 50,
     padding: 0,
   },
 
