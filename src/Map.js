@@ -16,6 +16,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import {makeAvoidString} from '../utils/utils';
+
 import {getRoute, getPollutionData} from '../api/api';
 import PollutionPointCard from './pp-card';
 
@@ -77,36 +79,13 @@ class Map extends Component {
       lat: 53.479915,
       lng: -2.236825,
     },
-    markers: [[-2, 53]],
+    markers: [],
     zoom: 12,
-    startCoordinates: [53.457915, -2.226825],
-    endCoordinates: [53.487144, -2.248454],
-    pollutionData: [
-      {
-        pp_coordinates: {
-          lat: 53.481471,
-          long: -2.242734,
-        },
-        am: {
-          pollutants: {
-            no2: 86.44,
-            pm10: 43.33,
-            so2: 0.44,
-            o3: 2.59,
-            pm25: 25.3,
-          },
-          top_corner: {
-            lat: 53.458971,
-            long: -2.250234,
-          },
-          bottom_corner: {
-            lat: 53.503971,
-            long: -2.235234,
-          },
-          aqi: 3,
-        },
-      },
-    ],
+    // startCoordinates: [53.457915, -2.226825],
+    // endCoordinates: [53.487144, -2.248454],
+    startCoordinates: [],
+    endCoordinates: [],
+    pollutionData: [],
     //NOT REQUIRED CURRENTLY
     directions: [],
     rectangle: [
@@ -138,6 +117,7 @@ class Map extends Component {
   fetchPollutionData = () => {
     getPollutionData().then(({data: {pollutionPoints}}) => {
       this.setState({pollutionData: pollutionPoints});
+      this.fetchRoute();
     });
   };
 
@@ -164,12 +144,44 @@ class Map extends Component {
   };
 
   componentDidMount() {
+    console.log('MOUNT PD', this.state.pollutionData);
+
     MapboxGL.setTelemetryEnabled(false);
-    this.fetchRoute(
-      [this.props.latitude, this.props.longitude],
-      this.state.endCoordinates,
-    );
-    this.fetchPollutionData();
+    // this.fetchPollutionDat
+
+    getPollutionData().then(({data: {pollutionPoints}}) => {
+      this.setState({pollutionData: pollutionPoints}, () => {
+        this.fetchRoute(
+          this.props.navigation.getParam('startCoordinates'),
+          this.props.navigation.getParam('endCoordinates'),
+          makeAvoidString(this.state.pollutionData),
+        );
+      });
+      // this.setState({pollutionData: pollutionPoints}, () => {
+      //   this.fetchRoute(
+      //     this.props.navigation.getParam('startCoordinates'),
+      //     this.props.navigation.getParam('endCoordinates'),
+      //     makeAvoidString(this.state.pollutionData),
+      //   );
+      // });
+    });
+
+    // this.fetchRoute(
+    //   this.props.navigation.getParam('startCoordinates'),
+    //   this.props.navigation.getParam('endCoordinates'),
+    //   makeAvoidString(this.state.pollutionData),
+    // );
+  }
+
+  componentDidUpdate(prevprops, prevstate) {
+    // console.log('MARKERS', this.state.markers);
+    // if (prevstate.markers.values() !== this.state.markers.values()) {
+    //   this.fetchRoute(
+    //     this.props.navigation.getParam('startCoordinates'),
+    //     this.props.navigation.getParam('endCoordinates'),
+    //     makeAvoidString(this.state.pollutionData),
+    //   );
+    // }
   }
 
   //   render() {
@@ -177,8 +189,14 @@ class Map extends Component {
   //   }
 
   render() {
-    // console.log('PP => ', this.state.pollutionData);
-    console.log(this.props.latitude);
+    // console.log(
+    //   'END COORDS => ',
+    //   this.props.navigation.getParam('endCoordinates'),
+    // );
+    // console.log(
+    //   'START COORDS => ',
+    //   this.props.navigation.getParam('startCoordinates'),
+    // );
     return (
       <View style={styles.page}>
         <View style={styles.container}>
@@ -203,12 +221,15 @@ class Map extends Component {
                   <View style={mapStyle.annotationContainer}>
                     <View style={mapStyle.annotationFill} />
                   </View>
-                  <MapboxGL.Callout
+                  {/* <MapboxGL.Callout
                     title="no me toques los huevos"
                     // style={mapStyle.annotationFill}
-                  />
+                  /> */}
                 </MapboxGL.PointAnnotation>
               );
+            })}
+            {this.state.pollutionData.map(point => {
+              console.log('PP =>', point.am.top_corner.lat);
             })}
             {this.showPollutionData()}
             <MapboxGL.ShapeSource
