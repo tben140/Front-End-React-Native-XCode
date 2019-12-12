@@ -119,6 +119,7 @@ export default class SignUpPage extends React.Component{
                      <Text>Log in</Text>
 
                    </TouchableOpacity>
+                   
 
                       
 
