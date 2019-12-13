@@ -146,16 +146,23 @@ export default class Homepage extends Component {
       return (
         <View style={styles.homepage}>
           <View style={styles.welcome}>
-            <Text style={styles.welcomeText}>
+            <Text
+              style={styles.welcomeText}
+              style={{fontSize: 18, textAlign: 'center'}}>
               Welcome to Saviar
+            </Text>
+            <Text style={styles.welcomeText}>
               {username ? (
-                <Text> {username}</Text>
+                <Text style={{fontSize: 20, paddingTop: 2}}> {username}</Text>
               ) : (
                 <Text> - Please log in</Text>
               )}
             </Text>
             <Text style={styles.welcomeText}>
-              A clean route through impure air!{'\n'}
+              <Text style={{fontSize: 15}}>
+                {' '}
+                A clean route through impure air!{'\n'}
+              </Text>
               {'\n'}
               Please, tab on a point, on the map below to select the end point
               for your route. Then, click "Find best route"
@@ -224,10 +231,11 @@ const styles = StyleSheet.create({
   welcomeText: {
     alignItems: 'center',
     textAlign: 'center',
-    padding: 20,
+    // padding: 20,
     color: '#24354f',
     fontFamily: 'NotoSantsTC-Black',
     fontSize: 12,
+    paddingBottom: 10,
   },
   map: {
     flex: 1,

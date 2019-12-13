@@ -9,6 +9,7 @@ import {
   AsyncStorage,
   Button,
   Alert,
+  // ImageBackground,
 } from 'react-native';
 import axios from 'axios';
 import LogoTitle from './LogoTitle';
@@ -64,7 +65,12 @@ export default class SignUpPage extends React.Component {
     const {username, email, password, currentLocation} = this.state;
 
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
+      // <ImageBackground
+      //   source={require('../assets/pics/running.jpeg')}
+      //   style={styles.imgBackground}
+      //   resizeMode="cover"
+      //   imageStyle={{opacity: 0.2}}>
+      <View behavior="padding" style={styles.wrapper}>
         <View style={styles.container}>
           <Text styles={styles.header} />
 
@@ -85,20 +91,25 @@ export default class SignUpPage extends React.Component {
             placeholder="password"
             onChangeText={password => this.setState({password})}
           />
-
-          <Button
-            style={styles.button}
-            title="Create Account"
-            onPress={() =>
-              this.signUp(username, email, password, currentLocation)
-            }></Button>
+          <View style={styles.loginButton}>
+            <TouchableOpacity
+              style={styles.button}
+              color="#11A0E2"
+              title="Log in"
+              onPress={() =>
+                this.signUp(username, email, password, currentLocation)
+              }>
+              <Text style={styles.textbutton}>Create Account</Text>
+            </TouchableOpacity>
+          </View>
 
           {/* <Button
             style={styles.btn}
             title="Log in"
             onPress={() => this.props.navigation.navigate('Home')}></Button> */}
         </View>
-      </KeyboardAvoidingView>
+      </View>
+      // </ImageBackground>
     );
   }
 }
@@ -110,8 +121,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingLeft: 40,
-    paddingRight: 40,
+    paddingLeft: 55,
+    paddingRight: 55,
+    // backgroundColor: '#DFE8FF',
   },
   header: {
     fontSize: 30,
@@ -122,15 +134,39 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 20,
     alignSelf: 'stretch',
+    color: 'white',
     backgroundColor: '#A4A4A4',
-  },
-
-  button: {
-    alignSelf: 'stretch',
-    // border: '1px',
-    borderColor: 'black',
+    opacity: 0.8,
+    borderColor: 'blue',
     borderWidth: 1,
-    borderRadius: 4,
-    backgroundColor: '#A4A4A4',
+    height: 55,
+    width: 300,
+    borderRadius: 7,
+  },
+  button: {
+    width: 100,
+    height: 60,
+    backgroundColor: '#11A0E2',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 7,
+    shadowColor: 'white',
+    shadowOffset: {
+      width: 20,
+      height: 20,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 50,
+    elevation: 20,
+  },
+  textbutton: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  loginButton: {
+    // alignSelf: 'stretch',
+    padding: 10,
+    color: 'white',
   },
 });
