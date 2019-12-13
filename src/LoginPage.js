@@ -55,6 +55,7 @@ export default class Login extends React.Component {
             placeholder="password"
             placeholderTextColor="white"
             onChangeText={password => this.setState({password})}
+            secureTextEntry={true}
           />
           <View style={styles.loginButton}>
             <TouchableOpacity

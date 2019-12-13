@@ -90,6 +90,7 @@ export default class SignUpPage extends React.Component {
             style={styles.TextInput}
             placeholder="password"
             onChangeText={password => this.setState({password})}
+            secureTextEntry={true}
           />
           <View style={styles.loginButton}>
             <TouchableOpacity
