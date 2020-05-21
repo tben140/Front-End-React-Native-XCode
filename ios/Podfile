@@ -34,11 +34,8 @@ target 'Savior' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  pod 'react-native-mapbox-gl', :path => '../node_modules/@react-native-mapbox-gl/maps'
 
-  pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'SaviorTests' do
     inherit! :search_paths

@@ -80,11 +80,11 @@ export default class Homepage extends Component {
       MyAccount: () => this.props.navigation.navigate('MyAccount'),
       // username: '',
     });
-    return fetch('https://project-bhilt.appspot.com/api/users')
+    return fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {
-          return user.username == 'Ben';
+          return user.username == 'ben';
         });
         const location = singleUser[0].current_location.split(', ');
         const latitude = Number(location[0]);

@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
 
 import {
@@ -25,25 +17,24 @@ import {
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+// import {
+//   Header,
+//   LearnMoreLinks,
+//   Colors,
+//   DebugInstructions,
+//   ReloadInstructions,
+// } from 'react-native/Libraries/NewAppScreen';
 
-import Geolocation from 'react-native-geolocation-service';
+// import Geolocation from 'react-native-geolocation-service';
 
-import Map from './src/Map';
-import Homepage from './src/Homepage';
-import LoginPage from './src/LoginPage';
-import MyAccount from './src/account';
-import SignUpPage from './src/SignUpPage';
+import Homepage from './src/components/Homepage';
+import Map from './src/components/Map';
+import LoginPage from './src/components/LoginPage';
+import MyAccount from './src/components/account';
+import SignUpPage from './src/components/SignUpPage';
 
 const appStackNavigator = createStackNavigator(
   {Homepage, Map, LoginPage, MyAccount, SignUpPage},
-
   {initialRouteName: 'Homepage'},
 );
 
@@ -111,7 +102,7 @@ class App extends Component {
     // console.log('STATE => ', this.state);
     return (
       <ImageBackground
-        source={require('./assets/pics/running.jpeg')}
+        source={require('./src/assets/pics/running.jpeg')}
         style={styles.imgBackground}
         resizeMode="cover"
         imageStyle={{opacity: 0.2}}>

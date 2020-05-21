@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 import React, {Component} from 'react';
+
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,12 +17,13 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import MapboxGL from '@react-native-mapbox-gl/maps';
+
 import {makeAvoidString} from '../utils/utils';
 
 import {getRoute, getPollutionData} from '../api/api';
-import PollutionPointCard from './pp-card';
 
-import MapboxGL from '@react-native-mapbox-gl/maps';
+// import PollutionPointCard from './pp-card';
 import LogoTitle from './LogoTitle';
 
 MapboxGL.setAccessToken(
@@ -103,10 +103,7 @@ class Map extends Component {
     pollutionData: [],
     //NOT REQUIRED CURRENTLY
     directions: [],
-    rectangle: [
-      [53.447967, -2.260778],
-      [53.443699, -2.25168],
-    ],
+    rectangle: [[53.447967, -2.260778], [53.443699, -2.25168]],
     isLoading: true,
     avoidAreaToggle: true,
     radius: 64,
@@ -125,6 +122,7 @@ class Map extends Component {
 
   fetchRoute = (startCoordinates, endCoordinates, avoidAreas) => {
     getRoute(startCoordinates, endCoordinates, avoidAreas).then(({data}) => {
+      console.log('ROUTE DATA ->>', data);
       const markerArr = [];
       data.response.route[0].leg[0].maneuver.forEach(point => {
         markerArr.push([point.position.longitude, point.position.latitude]);
@@ -164,7 +162,13 @@ class Map extends Component {
             {/* <View style={mapStyle.annotationFill} /> */}
           </View>
           <MapboxGL.Callout
-            title={`Name: ${point.name}\n\nCurrent AQI: ${point[TOD].aqi}\nNitrogen Dioxide: ${point[TOD].pollutants.no2}\nPM10: ${point[TOD].pollutants.pm10}\nSulphur Dioxide: ${point[TOD].pollutants.so2}\nOzone: ${point[TOD].pollutants.o3}\nPM2.5: ${point[TOD].pollutants.pm25}`}
+            title={`Name: ${point.name}\n\nCurrent AQI: ${
+              point[TOD].aqi
+            }\nNitrogen Dioxide: ${point[TOD].pollutants.no2}\nPM10: ${
+              point[TOD].pollutants.pm10
+            }\nSulphur Dioxide: ${point[TOD].pollutants.so2}\nOzone: ${
+              point[TOD].pollutants.o3
+            }\nPM2.5: ${point[TOD].pollutants.pm25}`}
             // style={mapStyle.annotationFill}
           />
         </MapboxGL.PointAnnotation>
@@ -265,7 +269,7 @@ class Map extends Component {
             {this.showPollutionData()}
             <MapboxGL.ShapeSource
               id="earthquakes"
-              url="https://project-bhilt.appspot.com/api/pollution-points">
+              url="https://spheric-mesh-269023.nw.r.appspot.com/api/pollution-points">
               <MapboxGL.HeatmapLayer
                 id="earthquakes"
                 sourceID="earthquakes"
@@ -310,7 +314,5 @@ class Map extends Component {
     );
   }
 }
-
-// const style = StyleSheet.create({});
 
 export default Map;

@@ -32,7 +32,7 @@ export default class MyAccount extends Component {
   };
 
   componentDidMount() {
-    return fetch('https://project-bhilt.appspot.com/api/users')
+    return fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {
@@ -52,7 +52,7 @@ export default class MyAccount extends Component {
 
   updateUsername = () => {
     const {newuser} = this.state;
-    fetch('https://project-bhilt.appspot.com/api/users', {
+    fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users', {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',
@@ -68,7 +68,7 @@ export default class MyAccount extends Component {
 
   updatePassword = () => {
     const {newpassword} = this.state;
-    fetch('https://project-bhilt.appspot.com/api/users', {
+    fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users', {
       method: 'PATCH',
       headers: {
         Accept: 'application/json',

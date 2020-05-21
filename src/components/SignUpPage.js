@@ -15,7 +15,7 @@ import LogoTitle from './LogoTitle';
 
 export default class SignUpPage extends React.Component {
   postUser = async (username, email, password, currentLocation) => {
-    const url = 'https://project-bhilt.appspot.com/api';
+    const url = 'https://spheric-mesh-269023.nw.r.appspot.com/api';
 
     const end_location = {
       lat: 0,
@@ -91,7 +91,8 @@ export default class SignUpPage extends React.Component {
             title="Create Account"
             onPress={() =>
               this.signUp(username, email, password, currentLocation)
-            }></Button>
+            }
+          />
 
           {/* <Button
             style={styles.btn}

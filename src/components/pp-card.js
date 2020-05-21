@@ -13,7 +13,7 @@ export default class PollutionPointCard extends React.Component {
   componentDidMount() {
     axios
       .get(
-        'https://project-bhilt.appspot.com/api/pollution-points/5def94a1d5e6bb4ecb429416',
+        'https://spheric-mesh-269023.nw.r.appspot.com/api/pollution-points/5def94a1d5e6bb4ecb429416',
       )
       .then(response => {
         this.setState({
@@ -91,5 +91,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });

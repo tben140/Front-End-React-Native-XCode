@@ -1,4 +1,3 @@
-/* eslint-disable react/self-closing-comp */
 import React from 'react';
 
 import {
@@ -13,8 +12,8 @@ import {
   Alert,
   ImageBackground,
 } from 'react-native';
-import getUser from './Api.js';
-import {declaredPredicate} from '@babel/types';
+
+import getUser from '../api/api.js';
 import LogoTitle from './LogoTitle';
 
 export default class Login extends React.Component {
