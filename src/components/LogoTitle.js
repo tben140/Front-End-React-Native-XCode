@@ -1,12 +1,13 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from 'react'
+import {StyleSheet, Text, View} from 'react-native'
+
 const LogoTitle = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Saviar</Text>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   title: {
@@ -19,6 +20,6 @@ const styles = StyleSheet.create({
   container: {
     color: '#fff',
   },
-});
+})
 
-export default LogoTitle;
+export default LogoTitle

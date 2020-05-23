@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   StyleSheet,
   Text,
@@ -9,18 +9,18 @@ import {
   AsyncStorage,
   Button,
   Alert,
-} from 'react-native';
-import axios from 'axios';
-import LogoTitle from './LogoTitle';
+} from 'react-native'
+import axios from 'axios'
+import LogoTitle from './LogoTitle'
 
 export default class SignUpPage extends React.Component {
   postUser = async (username, email, password, currentLocation) => {
-    const url = 'https://spheric-mesh-269023.nw.r.appspot.com/api';
+    const url = 'https://spheric-mesh-269023.nw.r.appspot.com/api'
 
     const end_location = {
       lat: 0,
       long: 0,
-    };
+    }
 
     const {data} = await axios.post(`${url}/users`, {
       username: username,
@@ -28,16 +28,16 @@ export default class SignUpPage extends React.Component {
       password: password,
       current_location: currentLocation,
       end_location: end_location,
-    });
-    return data;
-  };
+    })
+    return data
+  }
 
   state = {
     username: '',
     email: '',
     password: '',
     currentlocation: '53.4860211, -2.2397307',
-  };
+  }
 
   static navigationOptions = {
     headerTitle: <LogoTitle />,
@@ -45,23 +45,23 @@ export default class SignUpPage extends React.Component {
       backgroundColor: '#2196F3',
       color: 'white',
     },
-  };
+  }
 
   signUp = () => {
-    const {username, email, password, currentLocation} = this.state;
+    const {username, email, password, currentLocation} = this.state
 
     this.postUser(username, email, password, currentLocation)
       .then(res => {
-        Alert.alert('Account created');
-        this.props.navigation.navigate('Homepage');
+        Alert.alert('Account created')
+        this.props.navigation.navigate('Homepage')
       })
       .catch(error => {
-        Alert.alert('User already exist');
-      });
-  };
+        Alert.alert('User already exist')
+      })
+  }
 
   render() {
-    const {username, email, password, currentLocation} = this.state;
+    const {username, email, password, currentLocation} = this.state
 
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
@@ -100,7 +100,7 @@ export default class SignUpPage extends React.Component {
             onPress={() => this.props.navigation.navigate('Home')}></Button> */}
         </View>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
 const styles = StyleSheet.create({
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#A4A4A4',
   },
-});
+})

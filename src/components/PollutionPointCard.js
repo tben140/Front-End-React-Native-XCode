@@ -1,13 +1,13 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import axios from 'axios';
-import {retrieveNestedData} from '../utils/utils';
+import React from 'react'
+import {StyleSheet, Text, View} from 'react-native'
+import axios from 'axios'
+import {retrieveNestedData} from '../utils/utils'
 
 export default class PollutionPointCard extends React.Component {
   state = {
     pollution_point: {},
     isLoading: true,
-  };
+  }
   //to add:
   // pass the pollution point id on props to the end point below
   componentDidMount() {
@@ -19,51 +19,51 @@ export default class PollutionPointCard extends React.Component {
         this.setState({
           pollution_point: response.data.pollutionPoint,
           isLoading: false,
-        });
-      });
+        })
+      })
   }
 
   render() {
-    const {pollution_point} = this.state;
+    const {pollution_point} = this.state
     //util function manipulates the nested object into arrays
-    const pollutionPairs = retrieveNestedData(pollution_point);
-    const amArr = pollutionPairs[0];
+    const pollutionPairs = retrieveNestedData(pollution_point)
+    const amArr = pollutionPairs[0]
     // const midday = pollutionPairs[1];
     // const pm = pollutionPairs[2];
-    let aqi = 0;
-    let no2 = 0;
-    let pm10 = 0;
-    let so2 = 0;
-    let o3 = 0;
-    let pm25 = 0;
+    let aqi = 0
+    let no2 = 0
+    let pm10 = 0
+    let so2 = 0
+    let o3 = 0
+    let pm25 = 0
 
     if (!this.state.isLoading) {
       amArr.map(element => {
         if (element.includes('aqi:')) {
-          let score = element.split(':');
-          aqi = score[1];
+          let score = element.split(':')
+          aqi = score[1]
         }
         if (element.includes('no2:')) {
-          let score = element.split(':');
-          no2 = score[1];
+          let score = element.split(':')
+          no2 = score[1]
         }
         if (element.includes('pm10:')) {
-          let score = element.split(':');
-          pm10 = score[1];
+          let score = element.split(':')
+          pm10 = score[1]
         }
         if (element.includes('so2:')) {
-          let score = element.split(':');
-          so2 = score[1];
+          let score = element.split(':')
+          so2 = score[1]
         }
         if (element.includes('o3:')) {
-          let score = element.split(':');
-          o3 = score[1];
+          let score = element.split(':')
+          o3 = score[1]
         }
         if (element.includes('pm25:')) {
-          let score = element.split(':');
-          pm25 = score[1];
+          let score = element.split(':')
+          pm25 = score[1]
         }
-      });
+      })
     }
 
     return (
@@ -80,7 +80,7 @@ export default class PollutionPointCard extends React.Component {
           </>
         )}
       </View>
-    );
+    )
   }
 }
 
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

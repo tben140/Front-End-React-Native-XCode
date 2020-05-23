@@ -1,28 +1,13 @@
-import React, {Component} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  Dimensions,
-  Alert,
-} from 'react-native';
-import MapboxGL from '@react-native-mapbox-gl/maps';
-import LogoTitle from './LogoTitle';
-// import Map from './Map';
-import MyAccount from './account';
+import React, {Component} from 'react'
+import {StyleSheet, Text, View, Button, Dimensions, Alert} from 'react-native'
+import Geolocation from 'react-native-geolocation-service'
+import MapboxGL from '@react-native-mapbox-gl/maps'
 
-// import {createAppContainer} from 'react-navigation';
-// import {createStackNavigator} from 'react-navigation-stack';
-
-import Geolocation from 'react-native-geolocation-service';
+import LogoTitle from './LogoTitle'
 
 MapboxGL.setAccessToken(
   'pk.eyJ1IjoiaGFycnlwZnJ5IiwiYSI6ImNrM3EwYTVmYjA4Mzgzbm1vd2h0NjRobDgifQ.ZrK9wTTyKg6YpwI2KGC9bQ',
-);
-
-// import EndPointMap from "./endpointmap";
+)
 
 export default class Homepage extends Component {
   static navigationOptions = ({navigation}) => {
@@ -46,11 +31,11 @@ export default class Homepage extends Component {
         backgroundColor: '#2196F3',
         color: 'white',
       },
-    };
-  };
+    }
+  }
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isLoading: true,
       loggedIn: false,
@@ -69,26 +54,26 @@ export default class Homepage extends Component {
       markerDropped: false,
       startCoordinates: [],
       endCoordinates: [],
-    };
+    }
   }
 
   componentDidMount() {
-    this.findCoordinates();
+    this.findCoordinates()
     this.props.navigation.setParams({
       LoginPage: () => this.props.navigation.navigate('LoginPage'),
       Map: () => this.props.navigation.navigate('Map'),
       MyAccount: () => this.props.navigation.navigate('MyAccount'),
       // username: '',
-    });
+    })
     return fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {
-          return user.username == 'ben';
-        });
-        const location = singleUser[0].current_location.split(', ');
-        const latitude = Number(location[0]);
-        const longitude = Number(location[1]);
+          return user.username == 'ben'
+        })
+        const location = singleUser[0].current_location.split(', ')
+        const latitude = Number(location[0])
+        const longitude = Number(location[1])
         this.setState({
           isLoading: false,
           user: singleUser,
@@ -96,52 +81,52 @@ export default class Homepage extends Component {
           location: singleUser[0].current_location,
           latitude: latitude,
           longitude: longitude,
-        });
+        })
       })
       .catch(error => {
-        console.error(error);
-      });
+        console.error(error)
+      })
   }
 
   findCoordinates = () => {
     // console.log('Find coordinates running');
     Geolocation.getCurrentPosition(
       location => {
-        console.log(location.coords.latitude, location.coords.longitude);
+        console.log(location.coords.latitude, location.coords.longitude)
         this.setState({
           startCoordinates: [
             location.coords.latitude,
             location.coords.longitude,
           ],
-        });
+        })
       },
       error => {
-        console.log(error.code, error.message);
+        console.log(error.code, error.message)
       },
       {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-    );
-  };
+    )
+  }
 
   mapPressed = e => {
     // console.log(e.geometry.coordinates);
     this.setState({
       endCoordinates: [e.geometry.coordinates[1], e.geometry.coordinates[0]],
       markerDropped: true,
-    });
-  };
+    })
+  }
 
   render() {
     // {
     //   this.state.startCoordinates === null && this.findCoordinates();
     // }
-    const username = this.props.navigation.getParam('username');
+    const username = this.props.navigation.getParam('username')
     // console.log('PROPS =>', this.props.navigation.getParam('username'));
     if (this.state.isLoading) {
       return (
         <View>
           <Text style={styles.loading}>Loading...</Text>
         </View>
-      );
+      )
     } else {
       return (
         <View style={styles.homepage}>
@@ -189,19 +174,19 @@ export default class Homepage extends Component {
                 color="#11A0E2"
                 onPress={() => {
                   if (!this.state.markerDropped) {
-                    Alert.alert('Please drop pin');
+                    Alert.alert('Please drop pin')
                   } else {
                     this.props.navigation.navigate('Map', {
                       endCoordinates: this.state.endCoordinates,
                       startCoordinates: this.state.startCoordinates,
-                    });
+                    })
                   }
                 }}
               />
             </View>
           </View>
         </View>
-      );
+      )
     }
   }
 }
@@ -249,7 +234,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#2196F3',
     padding: 0,
   },
-});
+})
 
 const mapStyle = StyleSheet.create({
   annotationContainer: {
@@ -267,4 +252,4 @@ const mapStyle = StyleSheet.create({
     backgroundColor: 'green',
     transform: [{scale: 0.6}],
   },
-});
+})

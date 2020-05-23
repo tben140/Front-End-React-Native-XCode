@@ -1,26 +1,24 @@
-import React from 'react';
+import React from 'react'
 
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
-  KeyboardAvoidingView,
   TouchableOpacity,
-  AsyncStorage,
-  Button,
   Alert,
   ImageBackground,
-} from 'react-native';
+} from 'react-native'
 
-import getUser from '../api/api.js';
-import LogoTitle from './LogoTitle';
+import getUser from '../api/api.js'
+
+import LogoTitle from './LogoTitle'
 
 export default class Login extends React.Component {
   state = {
     username: '',
     password: '',
-  };
+  }
 
   static navigationOptions = {
     headerTitle: <LogoTitle />,
@@ -28,11 +26,11 @@ export default class Login extends React.Component {
       backgroundColor: '#2196F3',
       color: 'white',
     },
-  };
+  }
   //sends user/password to api function and then goes to homepage
 
   render() {
-    const {username, password} = this.state;
+    const {username, password} = this.state
     return (
       <ImageBackground
         source={require('../assets/pics/running.jpeg')}
@@ -61,25 +59,25 @@ export default class Login extends React.Component {
               color="#11A0E2"
               title="Log in"
               onPress={() => {
-                const {username, password} = this.state;
+                const {username, password} = this.state
 
                 getUser(username, password)
                   .then(res => {
-                    console.log(res);
+                    console.log(res)
 
                     //   if (res) {
                     this.props.navigation.navigate('Homepage', {
                       username,
                       password,
-                    });
+                    })
 
                     //   } else {
                     //     Alert.alert('Username not found. Please sign up');
                     //   }
                   })
                   .catch(err => {
-                    Alert.alert(err);
-                  });
+                    Alert.alert(err)
+                  })
               }}>
               <Text style={styles.textbutton}>Sign in</Text>
             </TouchableOpacity>
@@ -95,7 +93,7 @@ export default class Login extends React.Component {
           </View>
         </View>
       </ImageBackground>
-    );
+    )
   }
 }
 const styles = StyleSheet.create({
@@ -160,4 +158,4 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
-});
+})

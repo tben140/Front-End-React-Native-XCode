@@ -1,15 +1,11 @@
-/* eslint-disable react/jsx-no-duplicate-props */
-/* eslint-disable react-native/no-inline-styles */
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
-import LogoTitle from './LogoTitle';
-// import ProfilePics from './profilepics';
+import React, {Component} from 'react'
+import {StyleSheet, Text, View, Button, TextInput, Image} from 'react-native'
 
-// import 'react-native-gesture-handler';
+import LogoTitle from './LogoTitle'
 
 export default class MyAccount extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       isLoading: true,
       user: {},
@@ -20,7 +16,7 @@ export default class MyAccount extends Component {
       newpassword: '',
       updatePassword: false,
       profilePic: require('../assets/pics/blonde.jpeg'),
-    };
+    }
   }
 
   static navigationOptions = {
@@ -29,29 +25,29 @@ export default class MyAccount extends Component {
       backgroundColor: '#2196F3',
       color: 'white',
     },
-  };
+  }
 
   componentDidMount() {
     return fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {
-          return user.username == 'Ben'; //need to come from Login props
-        });
+          return user.username == 'Ben' //need to come from Login props
+        })
         this.setState({
           isLoading: false,
           user: singleUser,
           username: singleUser[0].username,
           email: singleUser[0].email,
-        });
+        })
       })
       .catch(error => {
-        console.error(error);
-      });
+        console.error(error)
+      })
   }
 
   updateUsername = () => {
-    const {newuser} = this.state;
+    const {newuser} = this.state
     fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users', {
       method: 'PATCH',
       headers: {
@@ -62,12 +58,12 @@ export default class MyAccount extends Component {
         username: newuser,
       }),
     }).catch(error => {
-      console.log(error);
-    });
-  };
+      console.log(error)
+    })
+  }
 
   updatePassword = () => {
-    const {newpassword} = this.state;
+    const {newpassword} = this.state
     fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users', {
       method: 'PATCH',
       headers: {
@@ -78,18 +74,18 @@ export default class MyAccount extends Component {
         password: newpassword,
       }),
     }).catch(error => {
-      console.log(error);
-    });
-  };
+      console.log(error)
+    })
+  }
 
   updatePic = pic => {
-    const {profilePic} = this.state;
-    this.setState({profilepic: pic});
-  };
+    const {profilePic} = this.state
+    this.setState({profilepic: pic})
+  }
 
   render() {
-    const {updateUser, username, updatePassword} = this.state;
-    const pic = require('../assets/pics/blonde.jpeg');
+    const {updateUser, username, updatePassword} = this.state
+    const pic = require('../assets/pics/blonde.jpeg')
     return (
       <View>
         <View
@@ -129,7 +125,7 @@ export default class MyAccount extends Component {
               onPress={() => {
                 updateUser
                   ? this.setState({updateUser: false})
-                  : this.setState({updateUser: true});
+                  : this.setState({updateUser: true})
               }}
             />
             {updateUser ? (
@@ -150,7 +146,7 @@ export default class MyAccount extends Component {
               onPress={() => {
                 updatePassword
                   ? this.setState({updatePassword: false})
-                  : this.setState({updatePassword: true});
+                  : this.setState({updatePassword: true})
               }}
             />
             {updatePassword ? (
@@ -174,7 +170,7 @@ export default class MyAccount extends Component {
         </View> */}
         </View>
       </View>
-    );
+    )
   }
 }
 const styles = StyleSheet.create({
@@ -230,4 +226,4 @@ const styles = StyleSheet.create({
     paddingRight: 110,
     paddingBottom: 40,
   },
-});
+})

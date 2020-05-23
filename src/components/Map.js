@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 
 import {
   SafeAreaView,
@@ -7,7 +7,7 @@ import {
   View,
   Text,
   StatusBar,
-} from 'react-native';
+} from 'react-native'
 
 import {
   Header,
@@ -15,20 +15,20 @@ import {
   Colors,
   DebugInstructions,
   ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+} from 'react-native/Libraries/NewAppScreen'
 
-import MapboxGL from '@react-native-mapbox-gl/maps';
+import MapboxGL from '@react-native-mapbox-gl/maps'
 
-import {makeAvoidString} from '../utils/utils';
+import {makeAvoidString} from '../utils/utils'
 
-import {getRoute, getPollutionData} from '../api/api';
+import {getRoute, getPollutionData} from '../api/api'
 
 // import PollutionPointCard from './pp-card';
-import LogoTitle from './LogoTitle';
+import LogoTitle from './LogoTitle'
 
 MapboxGL.setAccessToken(
   'pk.eyJ1IjoiaGFycnlwZnJ5IiwiYSI6ImNrM3EwYTVmYjA4Mzgzbm1vd2h0NjRobDgifQ.ZrK9wTTyKg6YpwI2KGC9bQ',
-);
+)
 
 const styles = StyleSheet.create({
   page: {
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-});
+})
 
 const mapStyle = StyleSheet.create({
   annotationContainer: {
@@ -73,7 +73,7 @@ const mapStyle = StyleSheet.create({
     backgroundColor: 'green',
     transform: [{scale: 0.6}],
   },
-});
+})
 
 class Map extends Component {
   state = {
@@ -110,7 +110,7 @@ class Map extends Component {
     blur: 8,
     max: 0.5,
     pollutionCoeff: 0.8,
-  };
+  }
 
   static navigationOptions = {
     headerTitle: <LogoTitle />,
@@ -118,15 +118,15 @@ class Map extends Component {
       backgroundColor: '#2196F3',
       color: 'white',
     },
-  };
+  }
 
   fetchRoute = (startCoordinates, endCoordinates, avoidAreas) => {
     getRoute(startCoordinates, endCoordinates, avoidAreas).then(({data}) => {
-      console.log('ROUTE DATA ->>', data);
-      const markerArr = [];
+      console.log('ROUTE DATA ->>', data)
+      const markerArr = []
       data.response.route[0].leg[0].maneuver.forEach(point => {
-        markerArr.push([point.position.longitude, point.position.latitude]);
-      });
+        markerArr.push([point.position.longitude, point.position.latitude])
+      })
       this.setState({
         markers: {
           type: 'FeatureCollection',
@@ -138,19 +138,19 @@ class Map extends Component {
             },
           ],
         },
-      });
-    });
-  };
+      })
+    })
+  }
 
   fetchPollutionData = () => {
     getPollutionData().then(({data: {pollutionPoints}}) => {
-      this.setState({pollutionData: pollutionPoints});
-      this.fetchRoute();
-    });
-  };
+      this.setState({pollutionData: pollutionPoints})
+      this.fetchRoute()
+    })
+  }
 
   showPollutionData = () => {
-    const TOD = 'am';
+    const TOD = 'am'
     return this.state.pollutionData.map((point, index) => {
       return (
         <MapboxGL.PointAnnotation
@@ -172,14 +172,14 @@ class Map extends Component {
             // style={mapStyle.annotationFill}
           />
         </MapboxGL.PointAnnotation>
-      );
-    });
-  };
+      )
+    })
+  }
 
   componentDidMount() {
-    console.log('MOUNT PD', this.state.pollutionData);
+    console.log('MOUNT PD', this.state.pollutionData)
 
-    MapboxGL.setTelemetryEnabled(false);
+    MapboxGL.setTelemetryEnabled(false)
     // this.fetchPollutionDat
 
     getPollutionData().then(({data: {pollutionPoints}}) => {
@@ -188,8 +188,8 @@ class Map extends Component {
           this.props.navigation.getParam('startCoordinates'),
           this.props.navigation.getParam('endCoordinates'),
           makeAvoidString(this.state.pollutionData),
-        );
-      });
+        )
+      })
       // this.setState({pollutionData: pollutionPoints}, () => {
       //   this.fetchRoute(
       //     this.props.navigation.getParam('startCoordinates'),
@@ -197,7 +197,7 @@ class Map extends Component {
       //     makeAvoidString(this.state.pollutionData),
       //   );
       // });
-    });
+    })
 
     // this.fetchRoute(
     //   this.props.navigation.getParam('startCoordinates'),
@@ -225,7 +225,7 @@ class Map extends Component {
     console.log(
       'End Coords => ',
       this.props.navigation.getParam('endCoordinates'),
-    );
+    )
     return (
       <View style={styles.page}>
         <View style={styles.container}>
@@ -264,7 +264,7 @@ class Map extends Component {
               ]}
             />
             {this.state.pollutionData.map(point => {
-              console.log('PP =>', point.am.top_corner.lat);
+              console.log('PP =>', point.am.top_corner.lat)
             })}
             {this.showPollutionData()}
             <MapboxGL.ShapeSource
@@ -311,8 +311,8 @@ class Map extends Component {
           </MapboxGL.MapView>
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default Map;
+export default Map
