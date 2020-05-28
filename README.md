@@ -5,7 +5,7 @@ This repo is the frontend repo for the Saviar Northcoders project group. The app
 |              | Link                                                                                                 |
 | ------------ | ---------------------------------------------------------------------------------------------------- |
 | Backend API  | [https://spheric-mesh-269023.nw.r.appspot.com/api](https://spheric-mesh-269023.nw.r.appspot.com/api) |
-| Backend Repo | [https://github.com/tben140/be-nc-running-app](https://github.com/tben140/be-nc-running-app)         |
+| Backend Repo | [https://github.com/tben140/Running-App-Backend](https://github.com/tben140/Running-App-Backend)     |
 
 <p align="center">
     <img alt="Screenshot" src="docs/screenshots/app-phone.png" width="300" />
@@ -18,13 +18,13 @@ First, go to https://reactnative.dev/docs/environment-setup and follow the instr
 Next, clone this repository:
 
 ```bash
-git clone https://github.com/tben140/fe-nc-running-app.git
+git clone hhttps://github.com/tben140/Running-App-Frontend.git
 ```
 
 Now cd into the repository and install the dependencies with the following terminal commands:
 
 ```bash
-cd fe-nc-running-app
+cd Running-App-Frontend
 npm install
 ```
 
