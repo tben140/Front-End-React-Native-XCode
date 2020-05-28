@@ -6,7 +6,7 @@ import MapboxGL from '@react-native-mapbox-gl/maps'
 import LogoTitle from './LogoTitle'
 
 MapboxGL.setAccessToken(
-  'pk.eyJ1IjoiaGFycnlwZnJ5IiwiYSI6ImNrM3EwYTVmYjA4Mzgzbm1vd2h0NjRobDgifQ.ZrK9wTTyKg6YpwI2KGC9bQ',
+  'pk.eyJ1IjoidGJlbjE0MCIsImEiOiJjazNuaXZzMzkwYnVnM3BxZWdscW1oNjFsIn0.ntQDEUbAKJHbHEQj7yfACg',
 )
 
 export default class Homepage extends Component {
@@ -42,15 +42,15 @@ export default class Homepage extends Component {
       user: {},
       username: '',
       location: '',
-      latitudeDelta: 0.0022,
-      longitudeDelta: 0.0121,
+      // latitudeDelta: 0.0022,
+      // longitudeDelta: 0.0121,
       latitude: 0,
       longitude: 0,
       defaultCenter: {
         lat: 53.479915,
         lng: -2.236825,
       },
-      zoom: 14,
+      zoom: 13.5,
       markerDropped: false,
       startCoordinates: [],
       endCoordinates: [],

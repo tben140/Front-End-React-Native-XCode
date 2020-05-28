@@ -59,13 +59,13 @@ class App extends Component {
 
   render() {
     return (
-      <ImageBackground
-        source={require('./src/assets/pics/running.jpeg')}
-        style={styles.imgBackground}
-        resizeMode="cover"
-        imageStyle={{opacity: 0.2}}>
-        <Application />
-      </ImageBackground>
+      // <ImageBackground
+      //   source={require('./src/assets/pics/running.jpeg')}
+      //   style={styles.imgBackground}
+      //   resizeMode="cover"
+      //   imageStyle={{opacity: 0.2}}>
+      <Application />
+      // </ImageBackground>
     )
   }
 }

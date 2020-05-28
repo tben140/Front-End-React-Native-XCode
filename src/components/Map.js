@@ -23,11 +23,10 @@ import {makeAvoidString} from '../utils/utils'
 
 import {getRoute, getPollutionData} from '../api/api'
 
-// import PollutionPointCard from './pp-card';
 import LogoTitle from './LogoTitle'
 
 MapboxGL.setAccessToken(
-  'pk.eyJ1IjoiaGFycnlwZnJ5IiwiYSI6ImNrM3EwYTVmYjA4Mzgzbm1vd2h0NjRobDgifQ.ZrK9wTTyKg6YpwI2KGC9bQ',
+  'pk.eyJ1IjoidGJlbjE0MCIsImEiOiJjazNuaXZzMzkwYnVnM3BxZWdscW1oNjFsIn0.ntQDEUbAKJHbHEQj7yfACg',
 )
 
 const styles = StyleSheet.create({
