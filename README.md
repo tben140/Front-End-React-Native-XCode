@@ -12,3 +12,25 @@ This repo is the frontend repo for the Saviar Northcoders project group. The app
 </p>
 
 ## Getting Started
+
+First, go to https://reactnative.dev/docs/environment-setup and follow the instructions to setup your environment.
+
+Next, clone this repository:
+
+```bash
+git clone https://github.com/tben140/fe-nc-running-app.git
+```
+
+Now cd into the repository and install the dependencies with the following terminal commands:
+
+```bash
+cd fe-nc-running-app
+npm install
+```
+
+Once the dependencies have installed, run one of the following commands to open the mobile app:
+
+```bash
+npm run android
+npm run ios
+```
