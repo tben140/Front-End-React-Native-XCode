@@ -65,7 +65,7 @@ export default class Homepage extends Component {
       MyAccount: () => this.props.navigation.navigate('MyAccount'),
       // username: '',
     })
-    return fetch('https://spheric-mesh-269023.nw.r.appspot.com/api/users')
+    return fetch('https://running-app-backend.herokuapp.com/api/users')
       .then(response => response.json())
       .then(responseJson => {
         const singleUser = responseJson.users.filter(user => {

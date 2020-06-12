@@ -13,7 +13,7 @@ import {createStackNavigator} from 'react-navigation-stack'
 import Homepage from './src/components/Homepage'
 import Map from './src/components/Map'
 import LoginPage from './src/components/LoginPage'
-import MyAccount from './src/components/Account'
+import MyAccount from './src/components/account'
 import SignUpPage from './src/components/SignUpPage'
 
 const appStackNavigator = createStackNavigator(
