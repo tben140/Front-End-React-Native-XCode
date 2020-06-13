@@ -4,7 +4,7 @@ This repo is the frontend repo for the Northcoders running app group project. Th
 
 |              | Link                                                                                                 |
 | ------------ | ---------------------------------------------------------------------------------------------------- |
-| Backend API  | [https://spheric-mesh-269023.nw.r.appspot.com/api](https://spheric-mesh-269023.nw.r.appspot.com/api) |
+| Backend API  | [https://running-app-backend.herokuapp.com/api](https://running-app-backend.herokuapp.com/api) |
 | Backend Repo | [https://github.com/tben140/Running-App-Backend](https://github.com/tben140/Running-App-Backend)     |
 
 <p align="center">
